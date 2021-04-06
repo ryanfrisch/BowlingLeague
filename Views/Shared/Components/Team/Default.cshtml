@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Team>
+
+@* display the name of the team selected above the filter buttons *@
+    <h3>@(ViewBag.SelectedTeam == null ? "All Teams" : ViewBag.SelectedTeam)</h3>
+
+@* if selected, fill in the button *@
+    <div>
+        <a class="btn btn-outline-secondary w-100 p-2 @(ViewBag.SelectedTeam == null ? "btn-secondary text-light" : "btn-outline-secondary")"
+           asp-controller="Home" asp-action="Index" asp-route-teamid="">
+            Home
+        </a>
+        <br />
+        <br />
+        @foreach (var t in Model)
+        {
+            <a class="btn btn-outline-secondary w-100 p-2 @(t.TeamName == ViewBag.SelectedTeam ? "btn-secondary text-light" : "btn-outline-secondary")"
+               asp-controller="Home" asp-action="Index" asp-route-teamid="@t.TeamId" asp-route-team="@t.TeamName">
+                @t.TeamName
+            </a>
+            <br />
+        }
+    </div>
+
